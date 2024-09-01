@@ -49,11 +49,30 @@ def countNumberOfWords(text_file):
     print(word_count, text_file)
 
 
+def countNumberOfCharacters(text_file):
+    """
+    Counts the number of characters in a text_file
+
+    Args:
+        text_file (str): file to count the number of characters
+
+    Returns:
+        void
+    """
+    character_count = 0
+    with open(text_file, "r", newline='', encoding="utf8") as f:
+        content = f.read()
+        character_count = len(content)
+
+    print(character_count, text_file)
+
+
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description='Our version of a wc tool')
     parser.add_argument('-c', help='Counts the number of bytes', type=str)
     parser.add_argument('-l', help='Counts the number of lines', type=str)
     parser.add_argument('-w', help='Counts the number of words', type=str)
+    parser.add_argument('-m', help='Counts the number of characters', type=str)
 
     args = parser.parse_args()
     if args.c:
@@ -62,3 +81,5 @@ if __name__ == "__main__":
         countNumberOfLines(args.l)
     elif args.w:
         countNumberOfWords(args.w)
+    elif args.m:
+        countNumberOfCharacters(args.m)
