@@ -1,6 +1,7 @@
 {
   "dependencies": {
-    "@types/node": "^22.5.3"
+    "@types/node": "^22.5.3",
+    "ts-node": "^10.9.2"
   },
   "scripts": {
     "test": "jest"
