@@ -27,35 +27,59 @@ describe("step1 tests", () => {
   });
 
   test("parse a json object without a closing curly braces", () => {
-    const jsonEmptyStrings = " \n   \n   \n         {     \n \n            ";
+    const jsonEmptyStrings = " \n   \n   \n         {     \n \n     **       ";
 
     expect(isJsonValid(jsonEmptyStrings)).toBe(false);
   });
 });
 
-// describe("step 2 tests", () => {
-//   const directory = "step2";
+describe("step 2 tests", () => {
+  const directory = "step2";
 
-//   test("parse a json object with additional comma", () => {
-//     const file = readFile(directory, "invalid.json");
-//     expect(isJsonValid(file)).toBe(false);
-//   });
+  test("parse a json object with additional comma", () => {
+    const file = readFile(directory, "invalid.json");
+    expect(isJsonValid(file)).toBe(false);
+  });
 
-//   test("parse a json object where the key has no quotes", () => {
-//     const file = readFile(directory, "invalid2.json");
-//     expect(isJsonValid(file)).toBe(false);
-//   });
+  test("parse a json object where the key has no quotes", () => {
+    const file = readFile(directory, "invalid2.json");
+    expect(isJsonValid(file)).toBe(false);
+  });
 
-//   test("parse a json object with 2 key-value pair", () => {
-//     const file = readFile(directory, "valid2.json");
-//     expect(isJsonValid(file)).toBe(true);
-//   });
+  test("parse a json object with 2 key-value pair", () => {
+    const file = readFile(directory, "valid2.json");
+    expect(isJsonValid(file)).toBe(true);
+  });
 
-//   test("parse a json object with false key-value pair", () => {
-//     const file = readFile(directory, "valid.json");
-//     expect(isJsonValid(file)).toBe(true);
-//   });
-// });
+  test("parse a json object with false key-value pair", () => {
+    const file = readFile(directory, "valid.json");
+    expect(isJsonValid(file)).toBe(true);
+  });
+
+  test("parse a json object with key that has no quotes", () => {
+    expect(isJsonValid(`{key: "value"}`)).toBe(false);
+  });
+
+  test("parse a json object with value that has no quotes", () => {
+    expect(isJsonValid(`{"key": value}`)).toBe(false);
+  });
+
+  test("parse a json object with key that has 1 quote", () => {
+    expect(isJsonValid(`{key: "value"}`)).toBe(false);
+  });
+
+  test("parse a json object with value that has 1 quote", () => {
+    expect(isJsonValid(`{"key: "value"}`)).toBe(false);
+  });
+
+  test("parse a json object with no colon", () => {
+    expect(isJsonValid(`{"key "value"}`)).toBe(false);
+  });
+
+  test("parse a json object with no comma", () => {
+    expect(isJsonValid(`{"key: "value" "key2":"value"}`)).toBe(false);
+  });
+});
 
 // describe("step 3 tests", () => {
 //   const directory = "step3";
