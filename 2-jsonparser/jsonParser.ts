@@ -1,5 +1,3 @@
-import { readFile } from "./tests/utils";
-
 export class JsonParser {
   private jsonString: string = "";
   private index: number = 0;
@@ -9,22 +7,16 @@ export class JsonParser {
    * @param string parse the string in the json object
    */
   private parseString = () => {
-    // TODO: Can fix this
-    for (let i = this.index; i < this.jsonString.length; i++) {
-      const character = this.jsonString.charAt(i);
-      if (character === '"') {
-        this.index = i + 1;
-        break;
-      } else if (character === " ") {
-      } else {
-        break;
-      }
+    const character = this.jsonString.charAt(this.index);
+    if (character === '"') {
+      this.index += 1;
+    } else {
+      throw new Error(`First " of the key cannot be found!`);
     }
+
     const value =
       this.jsonString.substring(this.index).search('"') + this.index;
-    if (value === -1)
-      throw new Error(`Something wrong in the string of key-value pair!`);
-
+    if (value === -1) throw new Error(`Second " of the key cannot be found!`);
     this.index = value + 1;
   };
 
@@ -156,16 +148,13 @@ export class JsonParser {
           // parsing keys
           this.parseSpaceAndNewlines();
           this.parseString();
-          // console.log(result, "1");
 
           // continue parsing for the colon
           this.parseSpaceAndNewlines();
           this.parseCharacters(":");
-          // console.log(result, "2");
 
           // parsing the value
           this.parseValue();
-          // console.log(result, "3");
 
           // parsing the comma
           commaResult = this.parseGeneralCharactersWithoutThrowingError(",");
@@ -177,7 +166,7 @@ export class JsonParser {
           // have to check remaining leftover
           this.parseLeftover();
         } else {
-          throw new Error("No curly bracket found!!");
+          throw new Error("No closing curly bracket found!!");
         }
       }
       return true;
@@ -188,7 +177,7 @@ export class JsonParser {
   };
 }
 
-const jsonParser = new JsonParser();
+// const jsonParser = new JsonParser();
 
 // console.log(jsonParser.isJsonValid(`{\n"key": "value",\n"key2": "value"\n}`));
 // console.log(
