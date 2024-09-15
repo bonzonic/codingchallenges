@@ -104,22 +104,22 @@ describe("Test Cases for json parser", () => {
     });
   });
 
-  // describe("step 4 tests", () => {
-  //   const directory = "step4";
+  describe("step 4 tests", () => {
+    const directory = "step4";
 
-  //   test("parse a json with objects, arrays, strings and numbers for the value", () => {
-  //     const file = readFile(directory, "valid.json");
-  //     expect(jsonParser.isJsonValid(file)).toBe(true);
-  //   });
+    test("parse a json with objects, arrays, strings and numbers for the value", () => {
+      const file = readFile(directory, "valid.json");
+      expect(jsonParser.isJsonValid(file)).toBe(true);
+    });
 
-  //   test("parse a json object with an object with key-value pair inside and array also have values in it", () => {
-  //     const file = readFile(directory, "valid2.json");
-  //     expect(jsonParser.isJsonValid(file)).toBe(true);
-  //   });
+    test("parse a json object with an object with key-value pair inside and array also have values in it", () => {
+      const file = readFile(directory, "valid2.json");
+      expect(jsonParser.isJsonValid(file)).toBe(true);
+    });
 
-  //   test("parse a json object with incorrect string syntax in the array object", () => {
-  //     const file = readFile(directory, "invalid.json");
-  //     expect(jsonParser.isJsonValid(file)).toBe(false);
-  //   });
-  // });
+    test("parse a json object with incorrect string syntax in the array object", () => {
+      const file = readFile(directory, "invalid.json");
+      expect(jsonParser.isJsonValid(file)).toBe(false);
+    });
+  });
 });
